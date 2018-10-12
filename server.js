@@ -27,8 +27,11 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/FFDB";
+
+mongoose.Promise = Promise;
 mongoose
-  .connect("mongodb://localhost/FFDB", { useNewUrlParser: true })
+  .connect(MONGODB_URI)
   .then(() => console.log("MongoDB Connected..."))
   .catch(err => console.log(err));
 
